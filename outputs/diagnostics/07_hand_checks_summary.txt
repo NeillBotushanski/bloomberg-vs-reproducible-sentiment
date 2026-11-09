@@ -1,0 +1,27 @@
+07_hand_checks
+raw workbook: data/raw_bloomberg/20261106/P2_Bloomberg_Pull_20261106.xlsx
+selection: seed 20261108, 10 draws from 622,570 eligible rows
+
+check_id ticker_exch       date         news_cell  raw_sentiment  hand_ret_oc_d0  hand_ret_cc_d1 result
+     H01      PLD UN 2021-02-09  News_Core!BSQ595         0.0000        0.004676        0.000931   PASS
+     H02      RSG UN 2021-06-18  News_Core!BYI724         0.0318       -0.010129        0.017931   PASS
+     H03      IEX UN 2022-06-29 News_Core!AUQ1100        -0.9502       -0.005219        0.003037   PASS
+     H04      BBY UN 2023-04-27  News_Core!KY1402        -0.6321        0.026239        0.013464   PASS
+     H05      BAC UN 2023-07-27  News_Core!KI1493         0.2142       -0.014193       -0.001566   PASS
+     H06      DAL UN 2023-12-01  News_Core!YI1620         0.0055        0.028935        0.002892   PASS
+     H07      LOW UN 2024-11-11 News_Core!BDK1966         0.0000        0.002557       -0.016794   PASS
+     H08       GM UN 2025-03-18 News_Core!AOE2093         0.0139       -0.013779        0.023011   PASS
+     H09      MTD UN 2025-06-03 News_Core!BKI2170        -0.1068        0.023211        0.002752   PASS
+     H10       IP UN 2025-12-09 News_Core!AVS2359        -0.0996       -0.018030        0.040978   PASS
+
+PASS: 10 of 10
+
+Terminal checks recorded on the Pilot_Checks sheet (2026-11-06):
+ check       security                       field       date  workbook_value  terminal_value result
+     1 AAPL UW Equity                     PX_LAST 2020-08-28    1.248075e+02    1.248075e+02   PASS
+     2 AAPL UW Equity                     PX_LAST 2020-08-31    1.290400e+02    1.290400e+02   PASS
+     3 AAPL UW Equity                     PX_LAST 2020-08-28    4.992300e+02    4.992300e+02   PASS
+     4 NVDA UW Equity                     PX_LAST 2024-06-07    1.208880e+02    1.208880e+02   PASS
+     5 NVDA UW Equity                   PX_VOLUME 2024-06-10    5.673474e+07    5.673474e+07   PASS
+     6 NVDA UW Equity TOT_RETURN_INDEX_GROSS_DVDS 2024-06-10    1.217900e+02    1.217900e+02   PASS
+     7 AAPL UW Equity    NEWS_SENTIMENT_DAILY_AVG 2020-08-31   -4.400000e-03   -4.400000e-03   PASS

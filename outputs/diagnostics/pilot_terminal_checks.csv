@@ -1,0 +1,8 @@
+check,what,security,field,date,workbook_value,terminal_value,result,where_read
+1,"AAPL close before the split, adjusted",AAPL UW Equity,PX_LAST,2020-08-28,124.8075,124.8075,PASS,HP <GO> on AAPL UW Equity (default adjustment includes splits)
+2,"AAPL close on the split date, adjusted",AAPL UW Equity,PX_LAST,2020-08-31,129.04,129.04,PASS,HP <GO> on AAPL UW Equity
+3,"AAPL close before the split, unadjusted",AAPL UW Equity,PX_LAST,2020-08-28,499.23,499.23,PASS,"HP <GO>, turn split adjustment off (should be about 4x row 1)"
+4,"NVDA close before the split, adjusted",NVDA UW Equity,PX_LAST,2024-06-07,120.888,120.888,PASS,HP <GO> on NVDA UW Equity
+5,NVDA volume on the split date,NVDA UW Equity,PX_VOLUME,2024-06-10,56734740.0,56734740.0,PASS,"HP <GO> on NVDA UW Equity, volume column"
+6,NVDA total-return index on the split date,NVDA UW Equity,TOT_RETURN_INDEX_GROSS_DVDS,2024-06-10,121.79,121.79,PASS,"HP <GO>, change the field to TOT_RETURN_INDEX_GROSS_DVDS"
+7,AAPL vendor sentiment on 2020-08-31,AAPL UW Equity,NEWS_SENTIMENT_DAILY_AVG,2020-08-31,-0.0044,-0.0044,PASS,GP <GO> (or HP) on AAPL UW Equity with the field NEWS_SENTIMENT_DAILY_AVG

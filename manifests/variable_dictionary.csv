@@ -1,0 +1,23 @@
+variable,definition,units,source,availability / timing,role
+date,NYSE trading day t,date,SPX trading calendar,-,index
+ticker_exch,"Bloomberg exchange ticker used on day t (member ticker, or the company's other ticker on an exchange-switch day, P3)",text,securities.csv,-,key
+ticker_as_member,Exchange ticker listed in the membership snapshot,text,universe_snapshots.csv,-,key
+composite_id_bb_global,Company-level FIGI (links the 18 two-exchange companies),text,securities.csv,static,key
+snapshot_date,Latest month-end snapshot strictly before t (P4),date,universe_snapshots.csv,known at t,membership
+bics_industry_sector,BICS sector (current classification),text,securities.csv,"current, not point-in-time",control
+news_sentiment_daily_avg,Bloomberg NEWS_SENTIMENT_DAILY_AVG (NW020) dated t: average story sentiment over the 24h to 09:20 New York on t,"score [-1,1]",news_daily.csv,known 09:20 on t,vendor signal
+news_publication_count,NW043 stories in the same 24h (all sources except Twitter/Stocktwits),stories,news_daily.csv,known 09:20 on t,coverage
+news_pos/neg/neutral_sentiment_count,"NW044-NW046 stories scored positive/negative/neutral, same 24h",stories,news_daily.csv,known 09:20 on t,coverage
+scored_story_count,pos + neg + neutral (blank if any is blank),stories,derived (03),known 09:20 on t,coverage
+has_sentiment,news_sentiment_daily_avg is not missing,bool,derived (03),known 09:20 on t,flag
+news_heat_pub_davg / news_heat_read_dmax,NW013 / NW016 news heat,"score [0,4]",news_daily.csv,local midnight (different clock),optional
+n_holiday_values_before,Vendor values dated on market holidays between the previous trading day and t (not merged),count,derived (05),known before open t,flag
+ret_cc_d0,close(t-1) -> close(t) total return = TRI_t / TRI_{t-1} - 1,decimal,market_daily.csv (TRI),NOT tradable from the value dated t,diagnostic only
+ret_oc_d0,open(t) -> close(t) price return = PX_LAST_t / PX_OPEN_t - 1,decimal,market_daily.csv,tradable from the value dated t,outcome candidate
+ret_cc_d1,close(t) -> close(t+1) total return = TRI_{t+1} / TRI_t - 1,decimal,market_daily.csv (TRI),tradable,outcome candidate
+px_last,"Close, split-adjusted",USD per share,market_daily.csv,close t,control
+cur_mkt_cap_musd,Market cap (BDH units: USD millions),USD millions,market_daily.csv,close t,control (size)
+dollar_volume_musd,px_last x composite volume / 1e6,USD millions,derived (04),close t,control (liquidity)
+article_id,Headline id A001-A188 in file order (frozen),text,News_Articles.csv,-,key (headline sample)
+vendor_date_if_before_0920 / _after_0920,Vendor value date that would contain the story if published before / after 09:20 on its file date,date,derived (03),-,alignment (P5)
+first_tradable_day_conservative,First trading day strictly after the headline's file date (S2 conservative cutoff),date,derived (03),-,alignment (P5)

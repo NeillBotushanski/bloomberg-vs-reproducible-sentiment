@@ -1,0 +1,53 @@
+# Project configuration: the single place for values used by more than one script.
+#   * A value appears here only if it is fixed by the brief or the supervisor, decided and recorded in
+#     design_decisions.md with its date, or is a plain fact about the files (paths, identifiers, dates).
+#   * Paths are relative to the project root.
+
+project:
+  title: "Is the Vendor's Secret Sauce Priced? Bloomberg vs a Reproducible Sentiment Score on Identical Text"
+  student: "Botushanski, Neill Liran"
+  assignment: "Project 2"
+  proposal_id: A16-02
+  official_area: "A16 - Alternative data, news & NLP"
+  official_category: "C6 - Data & applications"
+
+paths:
+  raw_bloomberg: data/raw_bloomberg        # immutable; one dated folder per terminal pull
+  raw_risklab: data/raw_risklab            # immutable; RiskLab copies (vendor sentiment files, News_Articles.csv, FRD stocks)
+  reference: data/reference_from_drive     # RiskLab catalogue and helpers
+  interim: data/interim
+  analytic: data/analytic
+  manifests: manifests
+  tables: outputs/tables
+  figures: outputs/figures
+  diagnostics: outputs/diagnostics
+  models: outputs/models
+
+sample:                                    # brief: 2020-2025 daily, S&P 500 single names
+  study_start: "2020-01-01"
+  study_end: "2025-12-31"
+  universe: "S&P 500 point-in-time members (month-end snapshots)"   # B2, PROPOSED
+
+bloomberg_pull:                            # B1-B6, PROPOSED 2026-11-03; mirrored in src/00a_build_bloomberg_pull_workbook.py
+  workbook: bloomberg_pull/P2_Bloomberg_Pull.xlsx
+  builder: src/00a_build_bloomberg_pull_workbook.py
+  freeze_script: src/01a_freeze_bloomberg_pull.py
+  pull_start: "2019-07-01"                 # B1: 6-month warm-up
+  pull_end: "2026-01-30"                   # B1: forward-return buffer
+  index: "SPX Index"
+  universe_field: INDX_MWEIGHT_HIST        # B2
+  universe_snapshots: "month-ends 2019-12-31 to 2025-12-31 (73)"
+  security_slots: 800
+  market_fields: [PX_OPEN, PX_LAST, TOT_RETURN_INDEX_GROSS_DVDS, PX_VOLUME, CUR_MKT_CAP]   # B3
+  news_core_fields: [NEWS_SENTIMENT_DAILY_AVG, NEWS_PUBLICATION_COUNT]                     # B4, B5
+  news_optional_fields: [NEWS_POS_SENTIMENT_COUNT, NEWS_NEG_SENTIMENT_COUNT, NEWS_NEUTRAL_SENTIMENT_COUNT,
+                         NEWS_HEAT_PUB_DAVG, NEWS_HEAT_READ_DMAX]
+  static_fields: [NAME, ID_BB_GLOBAL, ID_ISIN, TICKER_AND_EXCH_CODE, EQY_PRIM_EXCH, MARKET_STATUS,
+                  SECURITY_TYP, CRNCY, COUNTRY_ISO, GICS_SECTOR_NAME, GICS_INDUSTRY_GROUP_NAME, GICS_INDUSTRY_NAME]  # B6
+  earnings_field: EARN_ANN_DT_TIME_HIST_WITH_EPS
+  index_series: {"SPX Index": [PX_OPEN, PX_LAST], "SPXT Index": [PX_LAST], "VIX Index": [PX_LAST]}
+  price_bdh_options: "Dts=S, Days=T, Fill=B, Sort=A, CshAdjNormal=N, CshAdjAbnormal=N, CapChg=Y, UseDPDF=N"
+  news_bdh_options: "Dts=S, Days=A, Fill=B, Sort=A"
+
+rules:
+  intraday_source_only: 'C:\risklab\data\intraday_data'   # brief: no high-frequency data from Bloomberg

@@ -1,0 +1,106 @@
+02_raw_validation: 76 checks, 4 flagged
+
+[files]
+  PASS  Raw files whose SHA-256 matches the hash recorded on the terminal: 11/11
+  PASS  News_Articles.csv SHA-256 starts with the RiskLab catalogue value 53bff1c0: 53bff1c0
+
+[securities]
+  PASS  Rows (exchange tickers): 635
+  PASS  Duplicate ticker_exch: 0
+  PASS  Duplicate exchange-level FIGI (id_bb_global): 0
+  PASS  Companies (composite FIGI): 617
+  PASS  Companies with two exchange tickers: 18  (AEP UN / AEP UW; COO UN / COO UW; CPB UN / CPB UW; EXPD UN / EXPD UW; FISV UN / FISV UW; DOC UN / DOC US; HST UN / HST UW; KMB UN / KMB UW; WMT UN / WMT UW; GRMN UN / GRMN UW; ROP UN / ROP UW; HON UN / HON UW; PLTR UN / PLTR UW; DPZ UN / DPZ UW; BKR UN / BKR UW; EVRG UN / EVRG UW; APA UN / APA UW; LIN UN / LIN UW)
+  PASS  Pricing currency other than USD: 0
+  PASS  Missing GICS sector (inactive names): 60  (BICS sector is filled for all: 635)
+  PASS  Missing ISIN: 1  (1844053D US)
+  PASS  Market status counts: ACTV 567; ACQU 49; DLST 10; INAC 6; UNLS 1; HAND 1; RCNA 1
+
+[universe]
+  PASS  Snapshots: 73
+  PASS  Members per snapshot (min-max): 503-506
+  PASS  Duplicate (snapshot, ticker): 0
+  PASS  Distinct members across snapshots: 635
+  PASS  Members missing from securities.csv: 0
+  PASS  Snapshot rows where one company appears under two tickers: 0
+  PASS  Largest month-to-month change in member count: 1
+
+[market]
+  PASS  Rows: 978472
+  PASS  Duplicate (ticker, date): 0
+  PASS  Date range: 2019-07-01 to 2026-01-30
+  PASS  Rows on dates that are not SPX trading days: 0
+  PASS  Weekend rows: 0
+  PASS  px_open <= 0: 0
+  PASS  px_last <= 0: 0
+  PASS  tot_return_index_gross_dvds <= 0: 0
+  PASS  Share of rows missing each field: px_open 0.53%; px_last 0.53%; tot_return_index_gross_dvds 0.53%; px_volume_composite 0.25%; cur_mkt_cap_musd 0.01%
+  PASS  Securities with no price at all: 0
+  PASS  Days where total return is below price return by > 0.1% (should not happen): 0  (total return minus price return: median 0.00000, 99th pct 0.0024)
+  PASS  Daily total returns beyond +/-50%: 11  (AAP UN 2025-05-22 +57.0%; APA UN 2020-03-09 -53.9%; CPRI UN 2023-08-10 +55.7%; CVNA UN 2023-06-08 +56.0%; FRCB UN 2023-03-13 -61.8%; GL UN 2024-04-11 -53.1%; HOOD UW 2021-08-04 +50.4%; LUMN UN 2024-08-06 +93.0%; OXY UN 2020-03-09 -50.5%; SIVBQ UW 2023-03-09 -60.4%; TRGP UN 2020-03-09 -52.9%)
+  PASS  Open-to-close moves beyond +/-50%: 1
+  PASS  Median market cap (USD millions): 26394
+  PASS  Exchange volume / composite volume (median): 0.309  (rows with exchange > composite: 1)
+
+[news]
+  PASS  Rows (security-days with at least one value): 1070056
+  PASS  Duplicate (ticker, date): 0
+  PASS  Rows on Saturday or Sunday: 0
+  FLAG  Rows on weekday market holidays: 39842  (2019-07-04, 2019-09-02, 2019-11-28, 2019-12-25, 2020-01-01, 2020-01-20, 2020-02-17, 2020-04-10, 2020-05-25, 2020-07-03, 2020-09-07, 2020-11-26, 2020-12-25, 2021-01-01, 2021-01-18, 2021-02-15, 2021-04-02, 2021-05-31, 2021-07-05, 2021-09-06)
+  PASS  Sentiment outside [-1, 1]: 0
+  PASS  news_publication_count: negative or non-integer: 0
+  PASS  news_pos_sentiment_count: negative or non-integer: 0
+  PASS  news_neg_sentiment_count: negative or non-integer: 0
+  PASS  news_neutral_sentiment_count: negative or non-integer: 0
+  PASS  news_heat_pub_davg outside [0, 4]: 0
+  PASS  news_heat_read_dmax outside [0, 4]: 0
+  PASS  Tone counts (pos+neg+neutral) exceed the publication count: 1419  (median ratio tone/publication 0.143)
+  PASS  Sentiment present while all tone counts are zero: 1930  (sentiment value on those rows: {0.0: 1124, 0.1068: 19, 0.2039: 14})
+  PASS  Share of sentiment values exactly 0: 22.6%  (212,063 of 241,488 zeros have scored stories with positive = negative (a real neutral reading); missing sentiment with no scored stories: 181,360)
+  PASS  Correlation of the vendor score with (positive - negative) / scored stories: 0.808  (Descriptive only: how much of the black-box score a simple count ratio reproduces.)
+  PASS  Missing share by field: news_sentiment_daily_avg 21.2%; news_publication_count 0.6%; news_pos_sentiment_count 3.2%; news_neg_sentiment_count 6.4%; news_neutral_sentiment_count 0.4%; news_heat_pub_davg 5.0%; news_heat_read_dmax 19.0%
+
+[timing]
+  FLAG  Monday tone-count / Tue-Thu tone-count: 0.33  (Consistent with the FLDS 24h window: Monday's value covers mostly Sunday, so stories from Friday 09:20 to Sunday 09:20 fall in no daily value. To confirm with Bloomberg Help.)
+
+[index]
+  PASS  SPX Index rows: 1656
+  PASS  SPXT Index rows: 1656
+  PASS  VIX Index rows: 1684
+  PASS  VIX rows on non-SPX dates: 28
+
+[earnings]
+  PASS  Rows / securities: 62096 / 627
+  PASS  Duplicate (ticker, period): 0
+  PASS  Announcement times given as a label instead of HH:MM: 8857  (Bef-mkt 4993; Aft-mkt 3864; blank 7605)
+
+[joins]
+  PASS  securities.csv tickers with no market rows: 0
+  PASS  market tickers not in securities.csv: 0
+  PASS  securities.csv tickers with no news rows: 0
+  PASS  news tickers not in securities.csv: 0
+  PASS  securities.csv tickers with no earnings rows: 8  (2677689D UW, 9903115D UN, 9980328D UN, 9983490D UN, 9990213D UN, 9991429D UN, HFC UN, MYL UW)
+  PASS  earnings tickers not in securities.csv: 0
+
+[articles]
+  PASS  Encoding and line endings: UTF-8 BOM, CRLF
+  PASS  Rows and columns: 188 rows; Company, Date, Headline, URL
+  PASS  Unparseable dates: 0
+  PASS  Date range: 2020-01-15 to 2025-10-29
+  PASS  Firms: 19: AAPL, AMZN, CAT, CVX, DOW, DUK, FCX, GE, GOOGL, GS, JNJ, JPM, KO, META, NEE, PFE, PG, TSLA, XOM
+  PASS  Exact duplicate headlines: 0
+  PASS  Duplicate (firm, date): 0
+  PASS  Headlines dated on a weekend: 8
+  FLAG  URL field that is not a URL: 1  (TSLA 2025-04-17)
+  PASS  Headlines from bloomberg.com: 0
+  PASS  Most common source domains: reuters.com 32; cnbc.com 11; theguardian.com 7; esgtoday.com 7; npr.org 6; apple.com 4; bbc.com 4; forbes.com 3  (95 distinct domains)
+  PASS  Headlines whose URL carries a date: 69
+  FLAG  ... of which the URL date differs from the file date by more than 3 days: 3  (GS file 2023-01-10 vs URL 2023-01-27; KO file 2020-08-28 vs URL 2020-12-17; TSLA file 2024-03-31 vs URL 2024-05-31)
+
+Weekday story counts (2020-2025):
+             rows  mean_publication_count  mean_tone_count  share_with_sentiment
+weekday                                                                         
+Monday     194923                  33.569            4.692                 0.506
+Tuesday    194928                  63.612           13.017                 0.843
+Wednesday  195544                  68.659           14.999                 0.879
+Thursday   194919                  67.956           15.084                 0.873
+Friday     194914                  65.747           14.123                 0.867

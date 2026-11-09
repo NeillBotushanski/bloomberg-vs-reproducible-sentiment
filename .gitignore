@@ -1,0 +1,19 @@
+# Proprietary data (Bloomberg, RiskLab) and anything derived from it stays local
+data/**
+!data/**/
+!data/**/.gitkeep
+outputs/diagnostics/news_articles_validation.csv
+reports/*.html
+checkpoint 1/1. Report/*.html
+checkpoint 1/4. Outputs/diagnostics/news_articles_validation.csv
+
+# Local clutter
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.~lock*
+*.tmp
+.env
+.venv/
+node_modules/

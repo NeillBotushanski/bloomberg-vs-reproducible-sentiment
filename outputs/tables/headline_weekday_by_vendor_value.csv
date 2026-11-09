@@ -1,0 +1,8 @@
+weekday,Next-weekday value only,No vendor value can contain it,Same-day value only,Two candidate values (ambiguous)
+Mon,1,0,0,33
+Tue,0,1,1,47
+Wed,0,0,0,41
+Thu,0,1,0,28
+Fri,0,0,27,0
+Sat,0,3,0,0
+Sun,4,1,0,0

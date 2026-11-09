@@ -1,0 +1,63 @@
+06_descriptive_diagnostics (descriptive only; nothing estimated)
+
+Coverage by year:
+           trading_days  avg_members_per_day  securities  security_days  pct_with_vendor_row  pct_with_sentiment  pct_with_scored_story  mean_publication_count  median_publication_count  mean_scored_stories  sentiment_mean  sentiment_sd  sentiment_p05  sentiment_p50  sentiment_p95  pct_sentiment_exactly_0
+year                                                                                                                                                                                                                                                                                                              
+2020              253.0              505.087       525.0       127787.0               99.617              73.069                 68.806                  89.237                      35.0               12.534           0.027         0.281         -0.486            0.0          0.632                   47.190
+2021              252.0              505.000       522.0       127260.0               99.704              76.990                 67.945                  89.005                      32.0               15.380           0.018         0.342         -0.632            0.0          0.664                   41.383
+2022              251.0              503.821       520.0       126459.0               99.951              88.338                 87.395                  65.181                      22.0               12.832          -0.041         0.483         -0.865            0.0          0.865                   11.315
+2023              250.0              503.000       520.0       125750.0               99.963              86.739                 84.988                  48.587                      18.0               13.747          -0.029         0.330         -0.637            0.0          0.632                   12.708
+2024              252.0              503.091       523.0       126779.0               99.986              85.737                 83.684                  48.775                      18.0               12.680          -0.017         0.215         -0.402            0.0          0.329                   16.195
+2025              250.0              503.244       525.0       125811.0               99.978              81.290                 80.905                  48.250                      18.0               10.372          -0.005         0.183         -0.310            0.0          0.292                   27.076
+2020-2025        1508.0              503.877       630.0       759846.0               99.866              82.004                 78.919                  64.904                      23.0               12.857          -0.009         0.324         -0.632            0.0          0.632                   25.101
+
+Coverage by size quintile (market cap at the start of each month):
+               security_days  median_cap_musd  pct_with_sentiment  mean_publication_count  mean_scored_stories  sentiment_mean
+Q1 (smallest)       152330.0        10791.268              74.622                  26.159                4.994          -0.024
+Q2                  152266.0        18792.548              75.465                  26.245                5.053          -0.008
+Q3                  151534.0        30829.132              80.455                  33.843                6.505          -0.007
+Q4                  152266.0        53714.582              84.656                  46.741                8.607          -0.007
+Q5 (largest)        151364.0       157178.334              94.893                 191.865               37.545          -0.002
+
+Vendor counts by the day the value is dated (2020-2025):
+                       pub  scored  share
+kind                                     
+Mon                 34.848   4.844  0.518
+Tue                 63.712  13.031  0.844
+Wed                 69.178  15.103  0.880
+Thu                 68.687  15.290  0.875
+Fri                 66.204  14.262  0.870
+Holiday\n(weekday)  32.785   6.042  0.573
+
+The 188 headlines:
+              headlines       first        last  member_at_date  vendor_value_same_day  vendor_value_next_weekday  no_vendor_value  return_available  date_or_url_flag
+Company                                                                                                                                                               
+XOM                  12  2020-06-02  2024-05-29              12                     11                         10                1                12                 0
+GOOGL                12  2020-06-17  2025-10-24              12                     11                         11                0                12                 0
+DUK                  12  2020-10-12  2025-10-01              12                     11                          9                1                12                 0
+TSLA                 11  2020-03-19  2025-04-17               9                      8                          8                2                 9                 1
+PFE                  11  2020-01-20  2025-09-11              11                     10                          5                1                11                 0
+JPM                  11  2020-01-15  2025-10-17              11                     11                          8                0                11                 0
+JNJ                  11  2020-10-12  2025-10-29              11                     11                         11                0                11                 0
+AMZN                 11  2020-03-31  2024-06-24              11                     11                         10                0                11                 0
+GS                   11  2020-10-22  2025-10-13              11                     10                         11                0                11                 1
+FCX                  10  2020-09-03  2025-10-16              10                      8                          9                0                10                 0
+CVX                  10  2021-09-14  2025-01-20              10                     10                         10                0                10                 0
+PG                   10  2020-10-26  2025-07-28              10                     10                          7                0                10                 0
+CAT                  10  2020-03-26  2025-08-26              10                     10                          9                0                10                 0
+KO                    9  2020-08-28  2025-10-21               9                      9                          7                0                 9                 1
+NEE                   9  2020-10-03  2025-09-30               9                      8                          6                1                 9                 0
+AAPL                  8  2020-07-21  2024-01-22               8                      8                          7                0                 8                 0
+DOW                   7  2020-06-17  2025-09-03               7                      7                          6                0                 7                 0
+META                  7  2021-06-21  2025-04-18               7                      7                          5                0                 7                 0
+GE                    6  2020-09-21  2024-11-26               6                      6                          5                0                 6                 0
+All 19 firms        188  2020-01-15  2025-10-29             186                    177                        154                6               186                 3
+
+Headlines with a vendor value on both candidate dates (ambiguous): 149
+Headlines' share of all member security-days 2020-2025: 0.0247%
+The 19 headline firms account for 28,399 member security-days; headlines cover 0.66% of them.
+
+Figure layout check:
+fig1_vendor_coverage: no text overflow or overlap
+fig2_timing_window: no text overflow or overlap
+fig3_sentiment_distribution: no text overflow or overlap

@@ -1,0 +1,77 @@
+area,check,value,expected,status,detail
+files,Raw files whose SHA-256 matches the hash recorded on the terminal,11/11,all,PASS,
+files,News_Articles.csv SHA-256 starts with the RiskLab catalogue value 53bff1c0,53bff1c0,53bff1c0,PASS,
+securities,Rows (exchange tickers),635,635,PASS,
+securities,Duplicate ticker_exch,0,0,PASS,
+securities,Duplicate exchange-level FIGI (id_bb_global),0,0,PASS,
+securities,Companies (composite FIGI),617,617,PASS,
+securities,Companies with two exchange tickers,18,18,PASS,AEP UN / AEP UW; COO UN / COO UW; CPB UN / CPB UW; EXPD UN / EXPD UW; FISV UN / FISV UW; DOC UN / DOC US; HST UN / HST UW; KMB UN / KMB UW; WMT UN / WMT UW; GRMN UN / GRMN UW; ROP UN / ROP UW; HON UN / HON UW; PLTR UN / PLTR UW; DPZ UN / DPZ UW; BKR UN / BKR UW; EVRG UN / EVRG UW; APA UN / APA UW; LIN UN / LIN UW
+securities,Pricing currency other than USD,0,0,PASS,
+securities,Missing GICS sector (inactive names),60,60 (documented),PASS,BICS sector is filled for all: 635
+securities,Missing ISIN,1,small,PASS,1844053D US
+securities,Market status counts,ACTV 567; ACQU 49; DLST 10; INAC 6; UNLS 1; HAND 1; RCNA 1,current snapshot,PASS,
+universe,Snapshots,73,73,PASS,
+universe,Members per snapshot (min-max),503-506,~500-506,PASS,
+universe,"Duplicate (snapshot, ticker)",0,0,PASS,
+universe,Distinct members across snapshots,635,635,PASS,
+universe,Members missing from securities.csv,0,0,PASS,
+universe,Snapshot rows where one company appears under two tickers,0,0,PASS,
+universe,Largest month-to-month change in member count,1,small,PASS,
+market,Rows,978472,978472,PASS,
+market,"Duplicate (ticker, date)",0,0,PASS,
+market,Date range,2019-07-01 to 2026-01-30,2019-07-01 to 2026-01-30,PASS,
+market,Rows on dates that are not SPX trading days,0,0,PASS,
+market,Weekend rows,0,0,PASS,
+market,px_open <= 0,0,0,PASS,
+market,px_last <= 0,0,0,PASS,
+market,tot_return_index_gross_dvds <= 0,0,0,PASS,
+market,Share of rows missing each field,px_open 0.53%; px_last 0.53%; tot_return_index_gross_dvds 0.53%; px_volume_composite 0.25%; cur_mkt_cap_musd 0.01%,rows outside a listing are blank (Fill=B),PASS,
+market,Securities with no price at all,0,1 (1844053D US),PASS,
+market,Days where total return is below price return by > 0.1% (should not happen),0,0 or a handful,PASS,"total return minus price return: median 0.00000, 99th pct 0.0024"
+market,Daily total returns beyond +/-50%,11,a few (real events),PASS,AAP UN 2025-05-22 +57.0%; APA UN 2020-03-09 -53.9%; CPRI UN 2023-08-10 +55.7%; CVNA UN 2023-06-08 +56.0%; FRCB UN 2023-03-13 -61.8%; GL UN 2024-04-11 -53.1%; HOOD UW 2021-08-04 +50.4%; LUMN UN 2024-08-06 +93.0%; OXY UN 2020-03-09 -50.5%; SIVBQ UW 2023-03-09 -60.4%; TRGP UN 2020-03-09 -52.9%
+market,Open-to-close moves beyond +/-50%,1,a few,PASS,
+market,Median market cap (USD millions),26394,tens of thousands (millions units),PASS,
+market,Exchange volume / composite volume (median),0.309,< 1 (one exchange only),PASS,rows with exchange > composite: 1
+news,Rows (security-days with at least one value),1070056,1070056,PASS,
+news,"Duplicate (ticker, date)",0,0,PASS,
+news,Rows on Saturday or Sunday,0,0 (FLDS: no weekend values),PASS,
+news,Rows on weekday market holidays,39842,"0 according to the pull notes ('values on trading days only'); FLAG = the notes are wrong, values exist on holidays",FLAG,"2019-07-04, 2019-09-02, 2019-11-28, 2019-12-25, 2020-01-01, 2020-01-20, 2020-02-17, 2020-04-10, 2020-05-25, 2020-07-03, 2020-09-07, 2020-11-26, 2020-12-25, 2021-01-01, 2021-01-18, 2021-02-15, 2021-04-02, 2021-05-31, 2021-07-05, 2021-09-06"
+news,"Sentiment outside [-1, 1]",0,0,PASS,
+news,news_publication_count: negative or non-integer,0,0,PASS,
+news,news_pos_sentiment_count: negative or non-integer,0,0,PASS,
+news,news_neg_sentiment_count: negative or non-integer,0,0,PASS,
+news,news_neutral_sentiment_count: negative or non-integer,0,0,PASS,
+news,"news_heat_pub_davg outside [0, 4]",0,0,PASS,
+news,"news_heat_read_dmax outside [0, 4]",0,0,PASS,
+news,Tone counts (pos+neg+neutral) exceed the publication count,1419,few or none,PASS,median ratio tone/publication 0.143
+news,Sentiment present while all tone counts are zero,1930,describe,PASS,"sentiment value on those rows: {0.0: 1124, 0.1068: 19, 0.2039: 14}"
+news,Share of sentiment values exactly 0,22.6%,describe,PASS,"212,063 of 241,488 zeros have scored stories with positive = negative (a real neutral reading); missing sentiment with no scored stories: 181,360"
+news,Correlation of the vendor score with (positive - negative) / scored stories,0.808,describe,PASS,Descriptive only: how much of the black-box score a simple count ratio reproduces.
+news,Missing share by field,news_sentiment_daily_avg 21.2%; news_publication_count 0.6%; news_pos_sentiment_count 3.2%; news_neg_sentiment_count 6.4%; news_neutral_sentiment_count 0.4%; news_heat_pub_davg 5.0%; news_heat_read_dmax 19.0%,describe,PASS,
+timing,Monday tone-count / Tue-Thu tone-count,0.33,about 3 if Monday's value covered the whole weekend; well below 1 if it covers only the 24h to Monday 09:20,FLAG,"Consistent with the FLDS 24h window: Monday's value covers mostly Sunday, so stories from Friday 09:20 to Sunday 09:20 fall in no daily value. To confirm with Bloomberg Help."
+index,SPX Index rows,1656,"1,656 (VIX 1,684)",PASS,
+index,SPXT Index rows,1656,"1,656 (VIX 1,684)",PASS,
+index,VIX Index rows,1684,"1,656 (VIX 1,684)",PASS,
+index,VIX rows on non-SPX dates,28,28 (CBOE holidays),PASS,
+earnings,Rows / securities,62096 / 627,"62,096 / 627",PASS,
+earnings,"Duplicate (ticker, period)",0,0,PASS,
+earnings,Announcement times given as a label instead of HH:MM,8857,describe,PASS,Bef-mkt 4993; Aft-mkt 3864; blank 7605
+joins,securities.csv tickers with no market rows,0,documented,PASS,
+joins,market tickers not in securities.csv,0,0,PASS,
+joins,securities.csv tickers with no news rows,0,documented,PASS,
+joins,news tickers not in securities.csv,0,0,PASS,
+joins,securities.csv tickers with no earnings rows,8,documented,PASS,"2677689D UW, 9903115D UN, 9980328D UN, 9983490D UN, 9990213D UN, 9991429D UN, HFC UN, MYL UW"
+joins,earnings tickers not in securities.csv,0,0,PASS,
+articles,Encoding and line endings,"UTF-8 BOM, CRLF",readable,PASS,
+articles,Rows and columns,"188 rows; Company, Date, Headline, URL","188; Company, Date, Headline, URL",PASS,
+articles,Unparseable dates,0,0,PASS,
+articles,Date range,2020-01-15 to 2025-10-29,2020-2025,PASS,
+articles,Firms,"19: AAPL, AMZN, CAT, CVX, DOW, DUK, FCX, GE, GOOGL, GS, JNJ, JPM, KO, META, NEE, PFE, PG, TSLA, XOM",describe,PASS,
+articles,Exact duplicate headlines,0,0,PASS,
+articles,"Duplicate (firm, date)",0,describe,PASS,
+articles,Headlines dated on a weekend,8,describe,PASS,
+articles,URL field that is not a URL,1,0,FLAG,TSLA 2025-04-17
+articles,Headlines from bloomberg.com,0,describe (identical-text question),PASS,
+articles,Most common source domains,reuters.com 32; cnbc.com 11; theguardian.com 7; esgtoday.com 7; npr.org 6; apple.com 4; bbc.com 4; forbes.com 3,describe,PASS,95 distinct domains
+articles,Headlines whose URL carries a date,69,describe,PASS,
+articles,... of which the URL date differs from the file date by more than 3 days,3,0 ideally,FLAG,GS file 2023-01-10 vs URL 2023-01-27; KO file 2020-08-28 vs URL 2020-12-17; TSLA file 2024-03-31 vs URL 2024-05-31

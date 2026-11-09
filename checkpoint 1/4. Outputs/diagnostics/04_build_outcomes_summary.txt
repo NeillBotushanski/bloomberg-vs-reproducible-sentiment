@@ -1,0 +1,7 @@
+04_build_outcomes
+outcomes_daily.csv.gz: 978,472 rows, 635 securities
+  ret_cc available: 972,598; ret_oc: 973,239
+  returns not formed because a trading day is missing in between: 1
+  ret_cc quantiles (1%, 50%, 99%): -0.0661, 0.0007, 0.0690
+  ret_oc quantiles (1%, 50%, 99%): -0.0524, 0.0003, 0.0541
+index_returns.csv: 1656 trading days

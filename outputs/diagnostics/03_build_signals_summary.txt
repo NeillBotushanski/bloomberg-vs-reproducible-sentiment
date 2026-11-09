@@ -1,0 +1,9 @@
+03_build_signals
+vendor_news_signals.csv.gz: 1,070,056 security-days; 635 securities; 2019-07-01 to 2026-01-30
+  values dated on market holidays: 39,842 (first_tradable_day = next trading day)
+  rows with a sentiment value: 843,368
+
+articles_clean.csv: 188 headlines, 19 firms
+  mapped to an index member at the headline date: 186 (not a member: TSLA 2020-03-19, TSLA 2020-11-17)
+  headlines by weekday: Tuesday 49; Wednesday 41; Monday 34; Thursday 29; Friday 27; Sunday 5; Saturday 3
+  no daily vendor value can contain the story if it was published after 09:20 on a Friday, or on a Saturday: 27 Friday and 3 Saturday headlines are exposed

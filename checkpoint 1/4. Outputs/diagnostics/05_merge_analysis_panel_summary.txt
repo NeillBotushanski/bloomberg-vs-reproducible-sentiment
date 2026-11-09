@@ -1,0 +1,30 @@
+05_merge_analysis_panel
+panel_security_day.csv.gz: 759,846 rows, 630 securities, 1508 trading days
+  security-days with a holiday-dated vendor value just before them (not merged, counted): 29,202
+
+Sample attrition:
+step                                                                                                           rule        decision  securities_or_firms  security_days_or_headlines parent_step  dropped_vs_parent                                                                           notes
+   1 Universe security-days: members at the latest month-end before each NYSE trading day, 2020-01-02 to 2025-12-31   P4 (proposed)                  630                      759846                            NaN                                                                                
+  1b                            ... of which the company's other exchange ticker is used that day (exchange switch)   P3 (proposed)                    3                          42           1                NaN                                                                                
+   2                                                                                ... with a Bloomberg market row                                  630                      759347           1              499.0                                                                                
+   3                                                                              ... with a close price on the day                                  629                      759228           2              119.0                                                                                
+   4                                                       ... with both same-day returns (ret_cc_d0 and ret_oc_d0)                                  629                      759225           3                3.0                                                                                
+   5                                                      Universe security-days with a vendor news row (any field)                                  630                      759303           1              543.0                                                                                
+   6                                                   ... with a vendor sentiment value (NEWS_SENTIMENT_DAILY_AVG)                                  630                      623105           5           136198.0                                                                                
+   7                                             ... with sentiment and a same-day open-to-close return (ret_oc_d0)                                  629                      622618           6              487.0                                                                                
+   8                                            ... with sentiment and a next-day close-to-close return (ret_cc_d1)                                  629                      622570           6              535.0 Main vendor-signal sample for later work; nothing is estimated at checkpoint 1.
+  A1                                                                 Headlines in News_Articles.csv dated 2020-2025                                   19                         188                            NaN                                                                                
+  A2                                                            ... firm was an S&P 500 member at the headline date                                   19                         186          A1                2.0                                                                                
+  A3                           ... with a vendor sentiment value on at least one candidate date (d or next weekday)                                   19                         182          A2                4.0                                                                                
+  A4                         ... with a vendor value on both candidate dates (assignment of the story is ambiguous)                                   19                         149          A3               33.0                                                                                
+  A5         ... with a return from the open of the first trading day after the headline date (conservative cutoff) S2 (supervisor)                   19                         186          A2                0.0                       Primary identical-text sample (S2 fallback; decision D1).
+  A6                                               ... excluding headlines with a date or URL problem flagged in 02                                   19                         182          A5                4.0                                                                                
+
+Join report:
+                                                              join  left_rows  matched  unmatched  many_to_many
+      universe security-days -> outcomes_daily (ticker_exch, date)     759846   759347        499             0
+universe security-days -> vendor signal dated the same trading day     759846   759303        543             0
+Universe security-days with no market row, by reason:
+after the last Bloomberg market row (delisted or acquired during the month)    497
+before the first Bloomberg market row (new listing or spin-off)                  2
+Securities in the snapshots but never in the 2020-2025 panel (their first membership is the 2025-12-31 snapshot): ARES UN, CRH UN, CVNA UN, FIX UN, WMT UW
